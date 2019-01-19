@@ -44,6 +44,9 @@ module.exports = {
       state.ItemManager.add(corpse);
 
       if (killer && killer instanceof Player) {
+        if (killer.getMeta('config.autoloot') === true) {
+          state.CommandManager.get('get').execute(this.keywords[0] || 'corpse', killer, 'loot');
+        }
         if (currencies) {
           currencies.forEach(currency => {
             // distribute currency among group members in the same room
